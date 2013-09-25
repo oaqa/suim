@@ -1,0 +1,9 @@
+logs/
+target/
+*.DS_Store
+*.releaseBackup
+release.properties
+*.iml
+*.iws
+*.ipr
+.idea/

@@ -1,0 +1,3 @@
+classpath*:ex/TutorialTypeSystem.xml
+classpath*:org/apache/uima/examples/SourceDocumentInformation.xml
+
