@@ -23,9 +23,9 @@
    
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
 	<name>TutorialTypeSystem</name>
-	<description>Type System Definition for the tutorial examples - as of Exercise 3</description>
-	<vendor>The Apache Software Foundation</vendor>
+	<description>Type System Definition for the tutorial examples - as of Exercise 6</description>
 	<version>1.0</version>
+	<vendor>The Apache Software Foundation</vendor>
 	<types>
 		<typeDescription>
 			<name>org.apache.uima.tutorial.RoomNumber</name>
@@ -62,6 +62,60 @@
 			<description></description>
 			<supertypeName>org.apache.uima.tutorial.DateTimeAnnot</supertypeName>
 			<features></features>
+		</typeDescription>
+		<typeDescription>
+			<name>org.apache.uima.tutorial.Meeting</name>
+			<description></description>
+			<supertypeName>uima.tcas.Annotation</supertypeName>
+			<features>
+				<featureDescription>
+					<name>room</name>
+					<description></description>
+					<rangeTypeName>org.apache.uima.tutorial.RoomNumber</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>date</name>
+					<description></description>
+					<rangeTypeName>org.apache.uima.tutorial.DateAnnot</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>startTime</name>
+					<description></description>
+					<rangeTypeName>org.apache.uima.tutorial.TimeAnnot</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>endTime</name>
+					<description></description>
+					<rangeTypeName>org.apache.uima.tutorial.TimeAnnot</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+		<typeDescription>
+			<name>org.apache.uima.tutorial.UimaAcronym</name>
+			<description></description>
+			<supertypeName>uima.tcas.Annotation</supertypeName>
+			<features>
+				<featureDescription>
+					<name>expandedForm</name>
+					<description></description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+		<typeDescription>
+			<name>org.apache.uima.tutorial.UimaMeeting</name>
+			<description></description>
+			<supertypeName>org.apache.uima.tutorial.Meeting</supertypeName>
+		</typeDescription>
+        <typeDescription>
+			<name>org.apache.uima.examples.tokenizer.Token</name>
+			<description></description>
+			<supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+		<typeDescription>
+			<name>org.apache.uima.examples.tokenizer.Sentence</name>
+			<description></description>
+			<supertypeName>uima.tcas.Annotation</supertypeName>
 		</typeDescription>
 	</types>
 </typeSystemDescription>
