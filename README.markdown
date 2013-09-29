@@ -1,8 +1,13 @@
 # uima-on-spark
 
-This toolkit aims to provide a simple interface for UIMA analyitics on top of the Spark framework.
+This module provides a simple interface for [UIMA](http://uima.apache.org/) analyitics on top of 
+[Spark](http://spark.incubator.apache.org/). 
+The main abstraction Spark provides is a resilient distributed dataset (RDD), which is a collection 
+of elements partitioned across the nodes of the cluster that can be operated on in parallel [1].
 
-For example: Count distinct buildings from a file collection:
+
+## Examples
+Count distinct buildings from a file collection:
 
 
 ```scala
@@ -41,3 +46,6 @@ To create standalone with dependencies:
 
     mvn package
     java -jar target/spark-uima-tools-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+
+## References
+[http://spark.incubator.apache.org/docs/latest/scala-programming-guide.html]
