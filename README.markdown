@@ -16,7 +16,7 @@ Count distinct buildings from a file collection:
     val rdd = makeRDD(createCollectionReader(classOf[FileSystemCollectionReader], params: _*), sc)
     val roomAnnotator = createEngineDescription(classOf[RoomNumberAnnotator])
     val rooms = rdd.map(process(_, roomAnnotator)).flatMap(scas => JCasUtil.select(scas.jcas, classOf[RoomNumber]))
-    val counts = rooms.map(room => room.getBuilding()).countByValue()
+    val counts = rooms.map(room => room.getBuilding()).map((_,1)).reduceByKey(_ + _)
     println(counts)
 ```
 
