@@ -1,7 +1,7 @@
-# uima-on-spark
+# SUIM
 
-This module provides a simple interface for [UIMA](http://uima.apache.org/) analyitics on top of 
-[Spark](http://spark.incubator.apache.org/). 
+Spark for Unstrucutred Information Management, provides a simple interface for [UIMA](http://uima.apache.org/) analyitics 
+on top of [Spark](http://spark.incubator.apache.org/). 
 The main abstraction Spark provides is a resilient distributed dataset (RDD), which is a collection 
 of elements partitioned across the nodes of the cluster that can be operated on in parallel [1].
 
