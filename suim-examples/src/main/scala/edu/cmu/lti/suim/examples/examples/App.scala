@@ -29,6 +29,8 @@ import org.apache.uima.examples.cpe.FileSystemCollectionReader
 import org.apache.uima.tutorial.ex1.RoomNumberAnnotator
 import org.apache.uima.tutorial.RoomNumber
 
+import org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription
+import org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader
 import org.apache.uima.fit.factory._
 import org.apache.uima.fit.util.JCasUtil
 
@@ -48,9 +50,8 @@ object App {
 
     val typeSystem = TypeSystemDescriptionFactory.createTypeSystemDescription()
     val params = Seq(FileSystemCollectionReader.PARAM_INPUTDIR, "data")
-    val rdd = makeRDD(CollectionReaderFactory.createCollectionReader(
-      classOf[FileSystemCollectionReader], params: _*), sc)
-    val rnum = AnalysisEngineFactory.createEngineDescription(classOf[RoomNumberAnnotator])
+    val rdd = makeRDD(createCollectionReader(classOf[FileSystemCollectionReader], params: _*), sc)
+    val rnum = createEngineDescription(classOf[RoomNumberAnnotator])
     val rooms = rdd.map(process(_, rnum)).flatMap(scas => JCasUtil.select(scas.jcas, classOf[RoomNumber]))
     val counts = rooms.map(room => room.getBuilding()).map((_,1)).reduceByKey(_ + _)
     println(counts)
