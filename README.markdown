@@ -7,7 +7,10 @@ of elements partitioned across the nodes of the cluster that can be operated on 
 
 
 ## Examples
-Count distinct buildings from a file collection:
+
+### Count buildings 
+
+Using the `RoomAnnotator` from the UIMA tutorial:
 
 
 ```scala
@@ -20,7 +23,7 @@ Count distinct buildings from a file collection:
     counts.foreach(println(_))
 ```
 
-If the collection is to large to fit in memory use an HDFS RDD:
+If the collection is to large to fit in memory, or you already have a collection of `SCAS`es use an HDFS RDD:
 
 ```scala
     val rdd = sequenceFile(reateCollectionReader(classOf[FileSystemCollectionReader], params: _*),
