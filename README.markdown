@@ -1,6 +1,6 @@
 # SUIM
 
-Spark for Unstructured Information, provides a simple interface for [UIMA](http://uima.apache.org/) analyitics 
+Spark for Unstructured Information, provides a thin abstraction layer for [UIMA](http://uima.apache.org/) analyitics 
 on top of [Spark](http://spark.incubator.apache.org/). 
 The main abstraction Spark provides is a resilient distributed dataset (RDD), which is a collection 
 of elements partitioned across the nodes of the cluster that can be operated on in parallel [1].
@@ -27,7 +27,7 @@ If the collection is to large to fit in memory use an HDFS RDD:
       "hdfs://localhost:9000/documents", sc)
 ```
 
-Use DKPro Core [2] to tokenize and Spark to do word token level analytics.
+Use DKPro Core [2] to tokenize and Spark to do token level analytics.
 
 ```scala
     val typeSystem = TypeSystemDescriptionFactory.createTypeSystemDescription()
