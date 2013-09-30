@@ -27,7 +27,7 @@ If the collection is to large to fit in memory use an HDFS RDD:
       "hdfs://localhost:9000/documents", sc)
 ```
 
-Use DKPro Core [2] to annotate and Spark to count words.
+Use DKPro Core [2] to tokenize and Spark to do word token level analytics.
 
 ```scala
     val typeSystem = TypeSystemDescriptionFactory.createTypeSystemDescription()
