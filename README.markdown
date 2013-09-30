@@ -8,7 +8,7 @@ of elements partitioned across the nodes of the cluster that can be operated on 
 
 ## Examples
 
-### Count buildings 
+#### Count buildings from the UIMA tutorial.
 
 Using the `RoomAnnotator` from the UIMA tutorial:
 
@@ -29,6 +29,8 @@ If the collection is to large to fit in memory, or you already have a collection
     val rdd = sequenceFile(reateCollectionReader(classOf[FileSystemCollectionReader], params: _*),
       "hdfs://localhost:9000/documents", sc)
 ```
+
+#### Tokenize and count words with DKPro Core
 
 Use DKPro Core [2] to tokenize and Spark to do token level analytics.
 
