@@ -37,6 +37,7 @@ import org.apache.uima.fit.util.JCasUtil
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter
+import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Token
 
 import cmu.edu.lti.suim.SparkUimaUtils._
@@ -55,13 +56,18 @@ object Annotators {
 
     val typeSystem = TypeSystemDescriptionFactory.createTypeSystemDescription()
     val params = Seq()
-    // val rdd = makeRDD(createCollectionReader(classOf[TextReader], 
-    //   TextReader.PARAM_PATH, "data",
-    //   TextReader.PARAM_LANGUAGE, "en",
-    //   TextReader.PARAM_PATTERNS,  Array("[+]*.txt")), sc)
-    // val seg = createPrimitiveDescription(classOf[BreakIteratorSegmenter])
-    // val tokens = rdd.map(process(_, seg)).flatMap(scas => JCasUtil.select(scas.jcas, classOf[Token]))
-    // val counts = tokens.map(room => room.getBuilding()).map((_,1)).reduceByKey(_ + _)
-    // println(counts)
+    val rdd = makeRDD(createCollectionReader(classOf[TextReader],
+      ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "data",
+      ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
+      ResourceCollectionReaderBase.PARAM_PATTERNS,  Array("[+]*.txt")), sc)
+    val seg = createPrimitiveDescription(classOf[BreakIteratorSegmenter])
+    val tokens = rdd.map(process(_, seg)).flatMap(scas => JCasUtil.select(scas.jcas, classOf[Token]))
+    val counts = tokens.map(token => token.getCoveredText())
+      .filter(filter(_))
+      .map((_,1)).reduceByKey(_ + _)
+      .map(pair => (pair._2, pair._1)).sortByKey(true)
+    counts.foreach(println(_))
   }
+
+  def filter(input: String): Boolean = !input.forall(_.isDigit) && input.matches("""\w*""")
 }

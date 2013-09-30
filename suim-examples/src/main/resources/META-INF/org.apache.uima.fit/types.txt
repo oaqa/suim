@@ -1,3 +1,5 @@
 classpath*:ex/TutorialTypeSystem.xml
 classpath*:org/apache/uima/examples/SourceDocumentInformation.xml
+classpath*:desc/type/LexicalUnits.xml
+classpath*:desc/type/metadata.xml
 
