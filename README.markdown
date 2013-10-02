@@ -1,10 +1,12 @@
 # SUIM
 
-Spark for Unstructured Information, provides a thin abstraction layer for [UIMA](http://uima.apache.org/) analyitics 
+Spark for Unstructured Information, provides a thin abstraction layer for [UIMA](http://uima.apache.org/)  
 on top of [Spark](http://spark.incubator.apache.org/). 
-The main abstraction Spark provides is a resilient distributed dataset (RDD), which is a collection 
-of elements partitioned across the nodes of the cluster that can be operated on in parallel [1].
+SUIM leverages on Spark resilient distributed dataset (RDD) to run UIMA pipelines 
+distributed across the nodes on a cluster that can be operated on in parallel [1].
 
+SUIM allows you to run analytical pipelines on the resulting (or intermediate) `CAS`es to execute furhter text analytics or 
+machine learning algorithms.
 
 ## Examples
 
