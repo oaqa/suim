@@ -5,7 +5,7 @@ on top of [Spark](http://spark.incubator.apache.org/).
 SUIM leverages on Spark resilient distributed dataset (RDD) to run UIMA pipelines 
 distributed across the nodes on a cluster that can be operated on in parallel [1].
 
-SUIM allows you to run analytical pipelines on the resulting (or intermediate) `CAS`es to execute furhter text analytics or 
+SUIM allows you to run analytical pipelines on the resulting (or intermediate) `CAS` to execute furhter text analytics or 
 machine learning algorithms.
 
 ## Examples
