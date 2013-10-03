@@ -17,18 +17,9 @@
  * under the License.
  */
 
-package cmu.edu.lti.suim.examples
+package edu.cmu.lti.suim.examples
 
-// import cmu.edu.lti.suim._
-
-import org.apache.uima.collection.CollectionReader
-import org.apache.uima.util.CasCreationUtils
-import org.apache.uima.cas.CAS
 import org.apache.uima.jcas.JCas
-import org.apache.uima.cas.impl.Serialization
-import org.apache.uima.analysis_engine.AnalysisEngineDescription
-import org.apache.uima.resource.metadata.TypeSystemDescription
-import org.apache.uima.resource.metadata.ResourceMetaData
 import org.apache.uima.examples.cpe.FileSystemCollectionReader
 import org.apache.uima.tutorial.UimaAcronym
 import org.apache.uima.tutorial.Meeting
@@ -39,7 +30,7 @@ import org.apache.uima.fit.factory.AnalysisEngineFactory._
 import org.apache.uima.fit.util.JCasUtil._
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 
-import cmu.edu.lti.suim.SparkUimaUtils._
+import edu.cmu.lti.suim.SparkUimaUtils._
 
 import scala.collection.JavaConversions._
 
@@ -68,9 +59,9 @@ object SparkPipelineExample {
     val mMap = sc.broadcast(readMap("src/main/resources/org/apache/uima/tutorial/ex6/uimaAcronyms.txt"))
     val typeSystem = TypeSystemDescriptionFactory.createTypeSystemDescription()
     val params = Seq(FileSystemCollectionReader.PARAM_INPUTDIR, "data")
-    val rdd = makeRDD(CollectionReaderFactory.createCollectionReader(
+    val rdd = makeRDD(CollectionReaderFactory.createReader(
       classOf[FileSystemCollectionReader], params: _*), sc)
-    val result = rdd.map(process(_, createAggregateDescription(
+    val result = rdd.map(process(_, createEngineDescription(
       createEngineDescription(classOf[UimaAcronymAnnotator]),
       createEngineDescription(classOf[UimaMeetingAnnotator])))).cache
     result.flatMap(scas => select(scas.jcas, classOf[UimaAcronym])).foreach(println(_))

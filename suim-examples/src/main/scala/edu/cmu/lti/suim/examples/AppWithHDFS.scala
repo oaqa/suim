@@ -14,17 +14,8 @@
  *  limitations under the License.
  */
 
-package cmu.edu.lti.suim.examples
+package edu.cmu.lti.suim.examples
 
-// import cmu.edu.lti.suim._
-
-import org.apache.uima.collection.CollectionReader
-import org.apache.uima.util.CasCreationUtils
-import org.apache.uima.cas.CAS
-import org.apache.uima.cas.impl.Serialization
-import org.apache.uima.analysis_engine.AnalysisEngineDescription
-import org.apache.uima.resource.metadata.TypeSystemDescription
-import org.apache.uima.resource.metadata.ResourceMetaData
 import org.apache.uima.examples.cpe.FileSystemCollectionReader
 import org.apache.uima.tutorial.ex1.RoomNumberAnnotator
 import org.apache.uima.tutorial.RoomNumber
@@ -32,7 +23,7 @@ import org.apache.uima.tutorial.RoomNumber
 import org.apache.uima.fit.factory._
 import org.apache.uima.fit.util.JCasUtil
 
-import cmu.edu.lti.suim.SparkUimaUtils._
+import edu.cmu.lti.suim.SparkUimaUtils._
 
 import scala.collection.JavaConversions._
 

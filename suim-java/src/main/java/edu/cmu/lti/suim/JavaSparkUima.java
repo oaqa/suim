@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package cmu.edu.lti.suim;
+package edu.cmu.lti.suim;
 
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.util.CasCreationUtils;

@@ -14,24 +14,10 @@
  *  limitations under the License.
  */
 
-package cmu.edu.lti.suim.examples
-
-// import cmu.edu.lti.suim._
-
-import org.apache.uima.collection.CollectionReader
-import org.apache.uima.util.CasCreationUtils
-import org.apache.uima.cas.CAS
-import org.apache.uima.cas.impl.Serialization
-import org.apache.uima.analysis_engine.AnalysisEngineDescription
-import org.apache.uima.resource.metadata.TypeSystemDescription
-import org.apache.uima.resource.metadata.ResourceMetaData
-import org.apache.uima.examples.cpe.FileSystemCollectionReader
-import org.apache.uima.tutorial.ex1.RoomNumberAnnotator
-import org.apache.uima.tutorial.RoomNumber
+package edu.cmu.lti.suim.examples
 
 import org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription
-import org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription
-import org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader
+import org.apache.uima.fit.factory.CollectionReaderFactory.createReader
 import org.apache.uima.fit.factory._
 import org.apache.uima.fit.util.JCasUtil
 
@@ -40,7 +26,7 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Token
 
-import cmu.edu.lti.suim.SparkUimaUtils._
+import edu.cmu.lti.suim.SparkUimaUtils._
 
 import scala.collection.JavaConversions._
 
@@ -55,11 +41,10 @@ object Annotators {
       System.getenv("SPARK_HOME"), System.getenv("SPARK_CLASSPATH").split(":"))
 
     val typeSystem = TypeSystemDescriptionFactory.createTypeSystemDescription()
-    val rdd = makeRDD(createCollectionReader(classOf[TextReader],
-      ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "data",
-      ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
-      ResourceCollectionReaderBase.PARAM_PATTERNS,  Array("[+]*.txt")), sc)
-    val seg = createPrimitiveDescription(classOf[BreakIteratorSegmenter])
+    val rdd = makeRDD(createReader(classOf[TextReader],
+      ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "data/*.txt",
+      ResourceCollectionReaderBase.PARAM_LANGUAGE, "en"), sc)
+    val seg = createEngineDescription(classOf[BreakIteratorSegmenter])
     val tokens = rdd.map(process(_, seg)).flatMap(scas => JCasUtil.select(scas.jcas, classOf[Token]))
     val counts = tokens.map(token => token.getCoveredText()).filter(filter(_)).map((_,1)).reduceByKey(_ + _).map(pair => (pair._2, pair._1)).sortByKey(false)
     counts.take(20).foreach(println(_))
