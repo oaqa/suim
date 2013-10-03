@@ -55,18 +55,14 @@ object Annotators {
       System.getenv("SPARK_HOME"), System.getenv("SPARK_CLASSPATH").split(":"))
 
     val typeSystem = TypeSystemDescriptionFactory.createTypeSystemDescription()
-    val params = Seq()
     val rdd = makeRDD(createCollectionReader(classOf[TextReader],
       ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "data",
       ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
       ResourceCollectionReaderBase.PARAM_PATTERNS,  Array("[+]*.txt")), sc)
     val seg = createPrimitiveDescription(classOf[BreakIteratorSegmenter])
     val tokens = rdd.map(process(_, seg)).flatMap(scas => JCasUtil.select(scas.jcas, classOf[Token]))
-    val counts = tokens.map(token => token.getCoveredText())
-      .filter(filter(_))
-      .map((_,1)).reduceByKey(_ + _)
-      .map(pair => (pair._2, pair._1)).sortByKey(true)
-    counts.foreach(println(_))
+    val counts = tokens.map(token => token.getCoveredText()).filter(filter(_)).map((_,1)).reduceByKey(_ + _).map(pair => (pair._2, pair._1)).sortByKey(false)
+    counts.take(20).foreach(println(_))
   }
 
   def filter(input: String): Boolean = !input.forall(_.isDigit) && input.matches("""\w*""")

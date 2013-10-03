@@ -54,6 +54,6 @@ object App {
     val rnum = createEngineDescription(classOf[RoomNumberAnnotator])
     val rooms = rdd.map(process(_, rnum)).flatMap(scas => JCasUtil.select(scas.jcas, classOf[RoomNumber]))
     val counts = rooms.map(room => room.getBuilding()).map((_,1)).reduceByKey(_ + _)
-    println(counts)
+    counts.foreach(println(_))
   }
 }
