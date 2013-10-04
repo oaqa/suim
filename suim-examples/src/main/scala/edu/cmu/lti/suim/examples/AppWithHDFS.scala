@@ -16,19 +16,19 @@
 
 package edu.cmu.lti.suim.examples
 
-import org.apache.uima.examples.cpe.FileSystemCollectionReader
-import org.apache.uima.tutorial.ex1.RoomNumberAnnotator
-import org.apache.uima.tutorial.RoomNumber
-
-import org.apache.uima.fit.factory._
-import org.apache.uima.fit.util.JCasUtil
-
-import edu.cmu.lti.suim.SparkUimaUtils._
-
-import scala.collection.JavaConversions._
+import scala.collection.JavaConversions.collectionAsScalaIterable
 
 import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
+import org.apache.uima.examples.cpe.FileSystemCollectionReader
+import org.apache.uima.fit.factory.AnalysisEngineFactory
+import org.apache.uima.fit.factory.CollectionReaderFactory
+import org.apache.uima.fit.factory.TypeSystemDescriptionFactory
+import org.apache.uima.fit.util.JCasUtil
+import org.apache.uima.tutorial.RoomNumber
+import org.apache.uima.tutorial.ex1.RoomNumberAnnotator
+
+import edu.cmu.lti.suim.SparkUimaUtils.process
+import edu.cmu.lti.suim.SparkUimaUtils.sequenceFile
 
 
 object AppWithHDFS {

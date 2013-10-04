@@ -16,29 +16,16 @@
 
 package edu.cmu.lti.suim;
 
-import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.util.CasCreationUtils;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.impl.Serialization;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.resource.metadata.TypeSystemDescription;
-import org.apache.uima.resource.metadata.ResourceMetaData;
-import org.apache.uima.examples.cpe.FileSystemCollectionReader;
-import org.apache.uima.tutorial.ex1.RoomNumberAnnotator;
-import org.apache.uima.tutorial.RoomNumber;
-import org.apache.uima.resource.ResourceInitializationException;
-
-import org.apache.uima.fit.factory.*;
-import org.apache.uima.fit.util.JCasUtil;
-
-import org.apache.spark.api.java.*;
-import org.apache.spark.api.java.function.*;
+import java.util.List;
 
 import org.apache.hadoop.io.NullWritable;
-
-import java.util.List;
-import java.util.ArrayList;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.Function;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.factory.AnalysisEngineFactory;
+import org.apache.uima.resource.ResourceInitializationException;
 
 public final class JavaSparkUima {
 
@@ -54,10 +41,12 @@ public final class JavaSparkUima {
 
   public final static class PipelineFunction extends Function<SCAS, SCAS> {
 
-    private final AnalysisEngineDescription description;
+	private static final long serialVersionUID = -6881223764488277676L;
+	
+	private final AnalysisEngineDescription description;
     
     public PipelineFunction(AnalysisEngineDescription... descs) throws ResourceInitializationException {
-      this.description = AnalysisEngineFactory.createAggregateDescription(descs);
+      this.description = AnalysisEngineFactory.createEngineDescription(descs);
     }
 
     public PipelineFunction(AnalysisEngineDescription desc) {

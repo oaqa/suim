@@ -16,22 +16,22 @@
 
 package edu.cmu.lti.suim.examples
 
-import org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription
-import org.apache.uima.fit.factory.CollectionReaderFactory.createReader
-import org.apache.uima.fit.factory._
-import org.apache.uima.fit.util.JCasUtil
-
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Token
-
-import edu.cmu.lti.suim.SparkUimaUtils._
-
-import scala.collection.JavaConversions._
+import scala.collection.JavaConversions.collectionAsScalaIterable
 
 import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
+import org.apache.spark.SparkContext.rddToOrderedRDDFunctions
+import org.apache.spark.SparkContext.rddToPairRDDFunctions
+import org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription
+import org.apache.uima.fit.factory.CollectionReaderFactory.createReader
+import org.apache.uima.fit.factory.TypeSystemDescriptionFactory
+import org.apache.uima.fit.util.JCasUtil
+
+import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.`type`.Token
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter
+import edu.cmu.lti.suim.SparkUimaUtils.makeRDD
+import edu.cmu.lti.suim.SparkUimaUtils.process
 
 
 object Annotators {

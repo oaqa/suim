@@ -16,24 +16,18 @@
 
 package edu.cmu.lti.suim
 
-import org.apache.uima.cas.CAS
-import org.apache.uima.cas.impl.Serialization
-import org.apache.uima.resource.metadata.TypeSystemDescription
-import org.apache.uima.resource.metadata.ResourceMetaData
-import org.apache.uima.examples.cpe.FileSystemCollectionReader
-import org.apache.uima.tutorial.ex1.RoomNumberAnnotator
-
-import org.apache.uima.fit.factory._
-import org.apache.uima.fit.factory.TypeSystemDescriptionFactory
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.DataInput
+import java.io.DataOutput
+import java.io.Externalizable
+import java.io.ObjectInput
+import java.io.ObjectOutput
 
 import org.apache.hadoop.io.Writable
-
-import scala.collection.JavaConversions._
-
-import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
-
-import java.io._
+import org.apache.uima.cas.CAS
+import org.apache.uima.cas.impl.Serialization
+import org.apache.uima.fit.factory.JCasFactory
 
 object SCAS {
        

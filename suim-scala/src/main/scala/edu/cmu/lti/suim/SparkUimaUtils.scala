@@ -16,24 +16,24 @@
 
 package edu.cmu.lti.suim
 
-import org.apache.uima.collection.CollectionReader
-import org.apache.uima.analysis_engine.AnalysisEngineDescription
-
-import org.apache.uima.fit.factory._
-
-import scala.collection.JavaConversions._
-
-import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
-
 import java.net.URI
 
+import scala.collection.JavaConversions.asScalaBuffer
+import scala.collection.JavaConversions.bufferAsJavaList
+
 import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.io.SequenceFile
 import org.apache.hadoop.fs.FileSystem
 import org.apache.hadoop.fs.Path
-import org.apache.hadoop.io.NullWritable
 import org.apache.hadoop.io.IOUtils
+import org.apache.hadoop.io.NullWritable
+import org.apache.hadoop.io.SequenceFile
+import org.apache.spark.SparkContext
+import org.apache.spark.SparkContext.rddToPairRDDFunctions
+import org.apache.spark.SparkContext.writableWritableConverter
+import org.apache.uima.analysis_engine.AnalysisEngineDescription
+import org.apache.uima.collection.CollectionReader
+import org.apache.uima.fit.factory.AnalysisEngineFactory
+import org.apache.uima.fit.factory.JCasFactory
 
 object SparkUimaUtils {
 

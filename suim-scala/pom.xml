@@ -7,7 +7,7 @@
   <name>SUIM Scala</name>
 
   <properties>
-    <scala.version>2.9.2</scala.version>
+    <scala.version>2.9.3</scala.version>
   </properties>
 
   <!-- END REPOSITORIES -->
@@ -43,14 +43,14 @@
 
     <dependency>
       <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_${scala.version}</artifactId>
+      <artifactId>scalatest_2.9.2</artifactId>
       <version>1.7.2</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>org.scalamock</groupId>
-      <artifactId>scalamock-scalatest-support_${scala.version}</artifactId>
+      <artifactId>scalamock-scalatest-support_2.9.2</artifactId>
       <version>2.4</version>
       <scope>test</scope>
     </dependency>
@@ -121,30 +121,6 @@
                 <arg>${project.build.directory}/.scala_dependencies</arg>
               </args>
             </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2-beta-5</version>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <archive>
-            <manifest>
-              <mainClass>spark-uima-tools.App</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
           </execution>
         </executions>
       </plugin>
@@ -227,5 +203,41 @@
     </extensions>
     <!-- END EXTENSIONS -->
 
+    <pluginManagement>
+    	<plugins>
+    		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+    		<plugin>
+    			<groupId>org.eclipse.m2e</groupId>
+    			<artifactId>lifecycle-mapping</artifactId>
+    			<version>1.0.0</version>
+    			<configuration>
+    				<lifecycleMappingMetadata>
+    					<pluginExecutions>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>
+    									net.alchim31.maven
+    								</groupId>
+    								<artifactId>
+    									scala-maven-plugin
+    								</artifactId>
+    								<versionRange>
+    									[3.1.0,)
+    								</versionRange>
+    								<goals>
+    									<goal>compile</goal>
+    									<goal>testCompile</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    					</pluginExecutions>
+    				</lifecycleMappingMetadata>
+    			</configuration>
+    		</plugin>
+    	</plugins>
+    </pluginManagement>
   </build>
 </project>

@@ -19,27 +19,26 @@
 
 package edu.cmu.lti.suim.examples
 
-import org.apache.uima.jcas.JCas
-import org.apache.uima.examples.cpe.FileSystemCollectionReader
-import org.apache.uima.tutorial.UimaAcronym
-import org.apache.uima.tutorial.Meeting
-import org.apache.uima.tutorial.UimaMeeting
-
-import org.apache.uima.fit.factory._
-import org.apache.uima.fit.factory.AnalysisEngineFactory._
-import org.apache.uima.fit.util.JCasUtil._
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-
-import edu.cmu.lti.suim.SparkUimaUtils._
-
-import scala.collection.JavaConversions._
-
 import java.util.StringTokenizer
 
-import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
-
+import scala.collection.JavaConversions.bufferAsJavaList
+import scala.collection.JavaConversions.collectionAsScalaIterable
 import scala.io.Source
+
+import org.apache.spark.SparkContext
+import org.apache.uima.examples.cpe.FileSystemCollectionReader
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase
+import org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription
+import org.apache.uima.fit.factory.CollectionReaderFactory
+import org.apache.uima.fit.factory.TypeSystemDescriptionFactory
+import org.apache.uima.fit.util.JCasUtil.select
+import org.apache.uima.jcas.JCas
+import org.apache.uima.tutorial.Meeting
+import org.apache.uima.tutorial.UimaAcronym
+import org.apache.uima.tutorial.UimaMeeting
+
+import edu.cmu.lti.suim.SparkUimaUtils.makeRDD
+import edu.cmu.lti.suim.SparkUimaUtils.process
 
 object SparkPipelineExample {
 
